@@ -63,7 +63,7 @@ const Todo = () => {
         title: newTaskTitle,
         isDone: false,
       };
-      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setTasks((prevTasks) => [...prevTasks, newTaks]);
       setNewTaskTitle('');
       setSearchQuery('');
       newTaskInputRef.current.focus();

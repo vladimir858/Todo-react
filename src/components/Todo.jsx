@@ -26,17 +26,13 @@ const Todo = () => {
   const firstIncompleteTaskRef = useRef(null)
   const firstIncompleteTaskId = tasks.find(({ isDone }) => !isDone)?.id
 
-
-
-  const deleteAllTasks = useCallback(
- () => {
+  const deleteAllTasks = useCallback(() => {
     const isConfirmed = confirm('Are you sure you want to delete all?')
 
     if (isConfirmed) {
       setTasks([])
     }
-  } ,[])
-
+  }, [])
 
   const deleteTask = useCallback((taskId) => {
     setTasks(
@@ -44,7 +40,7 @@ const Todo = () => {
     )
   }, [tasks])
 
-  const toggleTaskComplete = useCallback( (taskId, isDone) => {
+  const toggleTaskComplete = useCallback((taskId, isDone) => {
     setTasks(
       tasks.map((task) => {
         if (task.id === taskId) {
@@ -54,7 +50,7 @@ const Todo = () => {
         return task
       })
     )
-  },[tasks])
+  }, [tasks])
 
   const addTask = useCallback(() => {
     if (newTaskTitle.trim().length > 0) {
@@ -62,13 +58,14 @@ const Todo = () => {
         id: crypto?.randomUUID() ?? Date.now().toString(),
         title: newTaskTitle,
         isDone: false,
-      };
-      setTasks((prevTasks) => [...prevTasks, newTaks]);
-      setNewTaskTitle('');
-      setSearchQuery('');
-      newTaskInputRef.current.focus();
+      }
+
+      setTasks((prevTasks) => [...prevTasks, newTask])
+      setNewTaskTitle('')
+      setSearchQuery('')
+      newTaskInputRef.current.focus()
     }
-  }, [newTaskTitle]);
+  }, [newTaskTitle])
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -78,19 +75,17 @@ const Todo = () => {
     newTaskInputRef.current.focus()
   }, [])
 
-
-
   const filteredTasks = useMemo(() => {
-  const clearSearchQuery = searchQuery.trim().toLowerCase()
-   return   clearSearchQuery.length > 0
+    const clearSearchQuery = searchQuery.trim().toLowerCase()
+
+    return clearSearchQuery.length > 0
       ? tasks.filter(({ title }) => title.toLowerCase().includes(clearSearchQuery))
       : null
-  }, [searchQuery,tasks])
+  }, [searchQuery, tasks])
 
-const doneTasks = useMemo(() => {
-   return tasks.filter(({ isDone }) => isDone).length
-}, [tasks])
-
+  const doneTasks = useMemo(() => {
+    return tasks.filter(({ isDone }) => isDone).length
+  }, [tasks])
 
   return (
     <div className="todo">

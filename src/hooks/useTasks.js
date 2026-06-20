@@ -4,21 +4,19 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,} from 'react'
+  useState,
+} from 'react'
+import useTasksLocalStorage from "./useTasksLocalStorage";
 const useTasks = () => {
-
-  const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('tasks')
-
-    if (savedTasks) {
-      return JSON.parse(savedTasks)
-    }
-
-    return [
+const {
+  savedTasks,
+  saveTasks,
+} = useTasksLocalStorage()
+  const [tasks, setTasks] =
+    useState(savedTasks ?? [
       { id: 'task-1', title: 'Купить молоко', isDone: false },
       { id: 'task-2', title: 'Погладить кота', isDone: true },
-    ]
-  })
+    ])
 
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
@@ -68,8 +66,9 @@ const useTasks = () => {
   }, [newTaskTitle])
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
+    saveTasks(tasks)
   }, [tasks])
+
 
   useEffect(() => {
     newTaskInputRef.current.focus()

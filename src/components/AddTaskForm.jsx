@@ -27,7 +27,9 @@ const AddTaskForm = () => {
         onInput={(event) => setNewTaskTitle(event.target.value)}
         ref={newTaskInputRef}
       />
-      <Button type="submit">Add</Button>
+      <Button
+        isDisabled={newTaskTitle.trim().length === 0}
+        type="submit">Add</Button>
     </form>
   )
 }

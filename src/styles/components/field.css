@@ -46,19 +46,20 @@
       background-repeat: no-repeat;
     }
   }
+
   &.is-invalid {
-    border-color: red ;
+    border-color: red;
   }
 }
+
 .field__error {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100%;
   position: absolute;
   top: 100%;
   left: 0;
   font-size: 12px;
   color: red;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
 }
-

@@ -19,8 +19,6 @@ const Field = (props) => {
         {label}
       </label>
       <input
-
-
         className={`field__input ${error ? 'is-invalid' : ''}`}
         id={id}
         placeholder=" "
